@@ -11,7 +11,10 @@ class KeyGenerator:
     __KEY_SIZE = 128
 
     def generate_keys(self) -> (PrivateKey, PublicKey):
-        return self.__generate_private_key(), None
+        privateKey = self.__generate_private_key()
+        publicKey = self.__generate_public_key(privateKey)
+
+        return privateKey, publicKey
 
     def __generate_private_key(self) -> PrivateKey:
         sequence = []
@@ -26,8 +29,13 @@ class KeyGenerator:
 
         return PrivateKey(sequence, m, r)
 
-    def __generate_public_key(self) -> PublicKey:
-        pass
+    @staticmethod
+    def __generate_public_key(private_key: PrivateKey) -> PublicKey:
+        sequence = []
+        for i in private_key.sequence:
+            sequence.append((i * private_key.r) % private_key.m)
+
+        return PublicKey(sequence)
 
     def __random_int(self):
         return randint(self.__MIN_INTERVAL, self.__MAX_INTERVAL)
