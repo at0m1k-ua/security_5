@@ -23,7 +23,7 @@ class KeyGeneratorTest(unittest.TestCase):
 
     def test_gcd_of_m_and_r_is_equal_to_1(self):
         privateKey, publicKey = self.__keygen.generate_keys()
-        self.assertEqual(1, math.gcd(privateKey.m, privateKey.r))
+        self.assertEqual(1, math.gcd(privateKey.m, privateKey.n))
 
 
 if __name__ == '__main__':

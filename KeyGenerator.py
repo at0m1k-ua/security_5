@@ -7,8 +7,8 @@ from PublicKey import PublicKey
 
 class KeyGenerator:
     __MIN_INTERVAL = 1
-    __MAX_INTERVAL = 256
-    __KEY_SIZE = 128
+    __MAX_INTERVAL = 16
+    __KEY_SIZE = 256
 
     def generate_keys(self) -> (PrivateKey, PublicKey):
         privateKey = self.__generate_private_key()
@@ -33,7 +33,7 @@ class KeyGenerator:
     def __generate_public_key(private_key: PrivateKey) -> PublicKey:
         sequence = []
         for i in private_key.sequence:
-            sequence.append((i * private_key.r) % private_key.m)
+            sequence.append((i * private_key.n) % private_key.m)
 
         return PublicKey(sequence)
 

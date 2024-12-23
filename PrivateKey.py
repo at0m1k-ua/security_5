@@ -6,4 +6,4 @@ from typing import List
 class PrivateKey:
     sequence: List[int]
     m: int
-    r: int
+    n: int
